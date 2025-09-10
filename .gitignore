@@ -25,6 +25,7 @@ staticfiles/
 
 # Environments
 venv/
+myenv/
 env/
 ENV/
 .venv/
