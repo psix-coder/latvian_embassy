@@ -22,6 +22,7 @@ class Meeting(models.Model):
     customer = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
     meet_time = models.DateTimeField()
     service = models.ForeignKey(Service, on_delete=models.CASCADE)
+    created_at = models.DateTimeField(auto_now_add=True, null=True, blank=True)
 
     def __str__(self):
         return self.customer.username

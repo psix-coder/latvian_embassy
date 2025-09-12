@@ -8,7 +8,12 @@ class ServiceSerializer(serializers.ModelSerializer):
 
 
 class MeetingSerializer(serializers.ModelSerializer):
-
     class Meta:
         model = Meeting
-        fields = ['id', 'customer', 'meet_time', 'service']
+        fields = ['id', 'customer', 'meet_time']
+
+
+class MeetingDetailSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Meeting
+        fields = ['id', 'customer', 'meet_time', 'service', 'created_at']

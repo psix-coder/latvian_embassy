@@ -12,4 +12,4 @@ class ServiceAdmin(admin.ModelAdmin):
 
 @admin.register(Meeting)
 class MeetingAdmin(admin.ModelAdmin):
-    list_display = ['customer', 'meet_time', 'service']
+    list_display = ['customer', 'meet_time', 'service', 'created_at']

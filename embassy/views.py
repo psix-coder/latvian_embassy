@@ -1,9 +1,14 @@
 from django.shortcuts import render
+from django.contrib.auth import get_user_model
 
 from rest_framework import viewsets
 
 from .models import Service, Meeting
-from .serializers import ServiceSerializer, MeetingSerializer
+from .serializers import ServiceSerializer, MeetingSerializer, MeetingDetailSerializer
+
+
+User = get_user_model()
+
 # Create your views here.
 
 
@@ -13,10 +18,21 @@ class ServiceViewSet(viewsets.ModelViewSet):
     serializer_class = ServiceSerializer
     lookup_field = 'slug'
 
-    def get_queryset(self):
-        pass  # shetga kodni yozasi
 
 """ ViewSet for Meeting management """
 class MeetingViewSet(viewsets.ModelViewSet):
     queryset = Meeting.objects.all()
     serializer_class = MeetingSerializer
+
+    def get_queryset(self):
+        return Meeting.objects.filter(customer=self.request.user)
+    
+    def perform_create(self, serializer):
+        serializer.save(customer=self.request.user)
+
+    def get_serializer_class(self, *args, **kwargs):
+        if self.action == "list":
+            return MeetingSerializer
+        return MeetingDetailSerializer
+        
+
